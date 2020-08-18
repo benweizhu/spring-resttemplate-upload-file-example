@@ -13,7 +13,7 @@ public class FileController {
   @CrossOrigin(origins = "*")
   @PostMapping(value = "/upload")
   public String uploadCSV(@RequestParam(value = "file") MultipartFile file) {
-    return file.getName();
+    return file.getOriginalFilename();
   }
 
 }
