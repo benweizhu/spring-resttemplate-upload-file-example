@@ -22,12 +22,13 @@ public class FileController {
 
   @CrossOrigin(origins = "*")
   @PostMapping(value = "/upload")
-  public String uploadCSV(@RequestParam(value = "file") MultipartFile file) {
+  public String uploadCSV(@RequestParam(value = "file") MultipartFile file, @RequestParam(value = "date") String date) {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
     MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
     body.add("file", file.getResource());
+    body.add("date", date);
     HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
     String serverUrl = "http://localhost:9091/upload";
