@@ -20,6 +20,9 @@ public class FileController {
   @Autowired
   private RestTemplate restTemplate;
 
+  @Autowired
+  private UploadClient uploadClient;
+
   @CrossOrigin(origins = "*")
   @PostMapping(value = "/upload")
   public String uploadCSV(@RequestParam(value = "file") MultipartFile file, @RequestParam(value = "date") String date) {
@@ -36,6 +39,12 @@ public class FileController {
     ResponseEntity<String> response = restTemplate
         .postForEntity(serverUrl, requestEntity, String.class);
     return response.getBody();
+  }
+
+  @CrossOrigin(origins = "*")
+  @PostMapping(value = "/uploadFile")
+  public String uploadFile(@RequestParam(value = "file") MultipartFile file, @RequestParam(value = "date") String date) {
+    return uploadClient.uploadCoupons(file, date);
   }
 
 }
